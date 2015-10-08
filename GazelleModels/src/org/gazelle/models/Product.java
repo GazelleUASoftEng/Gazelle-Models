@@ -19,9 +19,9 @@ public class Product extends BaseModel<Product> {
 		// this.description can be null, not sure how to handle it
 		this.description = rs.getString(ProductFieldNames.DESCRIPTION);
 		this.lookupCode = rs.getString(ProductFieldNames.LOOKUP_CODE);
-		this.price = rs.getFloat(ProductFieldNames.PRICE);
+		this.price = rs.getDouble(ProductFieldNames.PRICE);
 		this.itemType = ProductItemType.map(rs.getInt(ProductFieldNames.ITEM_TYPE));
-		this.cost = rs.getFloat(ProductFieldNames.COST);
+		this.cost = rs.getDouble(ProductFieldNames.COST);
 		this.quantity = rs.getInt(ProductFieldNames.QUANTITY);
 		this.reorderPoint = rs.getInt(ProductFieldNames.REORDER_POINT);
 		this.restockLevel = rs.getInt(ProductFieldNames.RESTOCK_LEVEL);
@@ -29,7 +29,7 @@ public class Product extends BaseModel<Product> {
 		
 		// extendedDescription can be null, not sure how to handle it
 		this.extendedDescription = rs.getString(ProductFieldNames.EXTENDED_DESCRIPTION);
-		this.msrp = rs.getFloat(ProductFieldNames.MSRP);
+		this.msrp = rs.getDouble(ProductFieldNames.MSRP);
 		this.createdOn = rs.getTimestamp(ProductFieldNames.CREATED_ON).toLocalDateTime();
 
 	}
@@ -81,12 +81,12 @@ public class Product extends BaseModel<Product> {
 		return this;
 	}
 	
-	private float price;
-	public Float getPrice(){
+	private double price;
+	public double getPrice(){
 		return this.price;
 	}
 	
-	public Product setPrice(float price){
+	public Product setPrice(double price){
 		if(this.price != price){
 			this.price = price;
 			this.propertyChanged(ProductFieldNames.PRICE);
@@ -107,12 +107,12 @@ public class Product extends BaseModel<Product> {
 		return this;
 	}
 	
-	private float cost;
-	public float getCost(){
+	private double cost;
+	public double getCost(){
 		return this.cost;
 	}
 	
-	public Product setCost(float cost){
+	public Product setCost(double cost){
 		if(this.cost != cost){
 			this.cost = cost;
 			this.propertyChanged(ProductFieldNames.COST);
@@ -198,12 +198,12 @@ public class Product extends BaseModel<Product> {
 		return this;
 	}
 	
-	private float msrp;
-	public float getMsrp(){
+	private double msrp;
+	public double getMsrp(){
 		return this.msrp;
 	}
 	
-	public Product setMsrp(float msrp){
+	public Product setMsrp(double msrp){
 		if(this.msrp != msrp){
 			this.msrp = msrp;
 			this.propertyChanged(ProductFieldNames.MSRP);
