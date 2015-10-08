@@ -12,7 +12,6 @@ public class ProductRepository extends BaseRepository<Product> implements Produc
 	}
 	
 	public ProductRepository() {
-		//TODO: Dr. P --> Need to update the DatabaseTable enum to include the Employee table name.
 		super(DatabaseTable.PRODUCT);
 	}
 }
