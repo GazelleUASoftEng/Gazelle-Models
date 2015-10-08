@@ -2,6 +2,7 @@ package org.gazelle.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ public class Product extends BaseModel<Product> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
 
+		// this.description can be null, not sure how to handle it
 		this.description = rs.getString(ProductFieldNames.DESCRIPTION);
 		this.lookupCode = rs.getString(ProductFieldNames.LOOKUP_CODE);
 		this.price = rs.getFloat(ProductFieldNames.PRICE);
@@ -24,6 +26,8 @@ public class Product extends BaseModel<Product> {
 		this.reorderPoint = rs.getInt(ProductFieldNames.REORDER_POINT);
 		this.restockLevel = rs.getInt(ProductFieldNames.RESTOCK_LEVEL);
 		this.parentItem = rs.getInt(ProductFieldNames.PARENT_ITEM);//this is currently an int, but may need to be a foreign key
+		
+		// extendedDescription can be null, not sure how to handle it
 		this.extendedDescription = rs.getString(ProductFieldNames.EXTENDED_DESCRIPTION);
 		this.msrp = rs.getFloat(ProductFieldNames.MSRP);
 		this.createdOn = rs.getTimestamp(ProductFieldNames.CREATED_ON).toLocalDateTime();
@@ -33,18 +37,20 @@ public class Product extends BaseModel<Product> {
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
 
-		record.put(ProductFieldNames.DESCRIPTION, this.description);
+		if (this.description != null) 
+			record.put(ProductFieldNames.DESCRIPTION, this.description);
 		record.put(ProductFieldNames.LOOKUP_CODE, this.lookupCode);
 		record.put(ProductFieldNames.PRICE, this.price);
-		record.put(ProductFieldNames.ITEM_TYPE, this.itemType);
+		record.put(ProductFieldNames.ITEM_TYPE, this.itemType.getValue());
 		record.put(ProductFieldNames.COST, this.cost);
 		record.put(ProductFieldNames.QUANTITY, this.quantity);
 		record.put(ProductFieldNames.REORDER_POINT, this.reorderPoint);
 		record.put(ProductFieldNames.RESTOCK_LEVEL, this.restockLevel);
 		record.put(ProductFieldNames.PARENT_ITEM, this.parentItem);
-		record.put(ProductFieldNames.EXTENDED_DESCRIPTION, this.extendedDescription);
+		if (this.extendedDescription != null) 
+			record.put(ProductFieldNames.EXTENDED_DESCRIPTION, this.extendedDescription);
 		record.put(ProductFieldNames.MSRP, this.msrp);
-		record.put(ProductFieldNames.CREATED_ON, this.createdOn);
+		record.put(ProductFieldNames.CREATED_ON, Timestamp.valueOf(this.createdOn));
 				
 		return record;
 	}
