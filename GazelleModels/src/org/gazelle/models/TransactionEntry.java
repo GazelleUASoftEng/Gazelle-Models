@@ -8,9 +8,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
-import org.gazelle.enums.EmployeeClassification;
-import org.gazelle.models.fieldnames.EmployeeFieldNames;
-import org.gazelle.repositories.EmployeeRepository;
+import org.gazelle.models.fieldnames.TransactionEntryFieldNames;
+import org.gazelle.repositories.TransactionEntryRepository;
 import org.npc.dataaccess.model.BaseModel;
 
 public class TransactionEntry extends BaseModel<TransactionEntry> {
