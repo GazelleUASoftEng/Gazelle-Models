@@ -1,4 +1,4 @@
-package org.gazelle.product.enums;
+package org.gazelle.enums;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 public enum ProductItemType {
 	NORMAL(0),
 	SERIALIZED(1),
-	MATRIX(2),
+	MATRIX(2);
 	
 	private int value;
 	public int getValue() {

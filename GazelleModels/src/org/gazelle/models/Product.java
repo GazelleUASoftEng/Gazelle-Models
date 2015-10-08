@@ -2,10 +2,8 @@ package org.gazelle.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.gazelle.enums.ProductItemType;
@@ -20,8 +18,8 @@ public class Product extends BaseModel<Product> {
 		this.description = rs.getString(ProductFieldNames.DESCRIPTION);
 		this.lookupCode = rs.getString(ProductFieldNames.LOOKUP_CODE);
 		this.price = rs.getFloat(ProductFieldNames.PRICE);
-		this.itemType = ProductLookupCode.map(rs.getInt(ProductFieldNames.ITEM_TYPE));
-		this.cost = rs.getFloat(ProductFieldNames.CLASSIFICATION);
+		this.itemType = ProductItemType.map(rs.getInt(ProductFieldNames.ITEM_TYPE));
+		this.cost = rs.getFloat(ProductFieldNames.COST);
 		this.quantity = rs.getInt(ProductFieldNames.QUANTITY);
 		this.reorderPoint = rs.getInt(ProductFieldNames.REORDER_POINT);
 		this.restockLevel = rs.getInt(ProductFieldNames.RESTOCK_LEVEL);
@@ -39,12 +37,12 @@ public class Product extends BaseModel<Product> {
 		record.put(ProductFieldNames.LOOKUP_CODE, this.lookupCode);
 		record.put(ProductFieldNames.PRICE, this.price);
 		record.put(ProductFieldNames.ITEM_TYPE, this.itemType);
-		record.put(ProductFieldNames.CLASSIFICATION, this.classification);
+		record.put(ProductFieldNames.COST, this.cost);
 		record.put(ProductFieldNames.QUANTITY, this.quantity);
 		record.put(ProductFieldNames.REORDER_POINT, this.reorderPoint);
 		record.put(ProductFieldNames.RESTOCK_LEVEL, this.restockLevel);
 		record.put(ProductFieldNames.PARENT_ITEM, this.parentItem);
-		record.put(ProductFieldNames.EXTENDED_DESCRIPTION, this.itemDescription);
+		record.put(ProductFieldNames.EXTENDED_DESCRIPTION, this.extendedDescription);
 		record.put(ProductFieldNames.MSRP, this.msrp);
 		record.put(ProductFieldNames.CREATED_ON, this.createdOn);
 				
@@ -104,11 +102,11 @@ public class Product extends BaseModel<Product> {
 	}
 	
 	private float cost;
-	public int getCost(){
+	public float getCost(){
 		return this.cost;
 	}
 	
-	public float setCost(float cost){
+	public Product setCost(float cost){
 		if(this.cost != cost){
 			this.cost = cost;
 			this.propertyChanged(ProductFieldNames.COST);
@@ -121,7 +119,7 @@ public class Product extends BaseModel<Product> {
 		return this.quantity;
 	}
 	
-	public int setQuantity(int quantity){
+	public Product setQuantity(int quantity){
 		if(this.quantity != quantity){
 			this.quantity = quantity;
 			this.propertyChanged(ProductFieldNames.QUANTITY);
@@ -134,7 +132,7 @@ public class Product extends BaseModel<Product> {
 		return this.reorderPoint;
 	}
 	
-	public int setReorderPoint(int reorderPoint){
+	public Product setReorderPoint(int reorderPoint){
 		if(this.reorderPoint != reorderPoint){
 			this.reorderPoint = reorderPoint;
 			this.propertyChanged(ProductFieldNames.REORDER_POINT);
@@ -147,7 +145,7 @@ public class Product extends BaseModel<Product> {
 		return this.restockLevel;
 	}
 	
-	public int setRestockLevel(int restockLevel){
+	public Product setRestockLevel(int restockLevel){
 		if(this.restockLevel != restockLevel){
 			this.restockLevel = restockLevel;
 			this.propertyChanged(ProductFieldNames.RESTOCK_LEVEL);
@@ -160,7 +158,7 @@ public class Product extends BaseModel<Product> {
 		return this.parentItem;
 	}
 	
-	public int setParentItem(int parentItem){
+	public Product setParentItem(int parentItem){
 		if(this.parentItem != parentItem){
 			this.parentItem = parentItem;
 			this.propertyChanged(ProductFieldNames.PARENT_ITEM);
@@ -173,7 +171,7 @@ public class Product extends BaseModel<Product> {
 		return this.extendedDescription;
 	}
 	
-	public String setExtendedDescription(String extendedDescription){
+	public Product setExtendedDescription(String extendedDescription){
 		if(!this.extendedDescription.equals(extendedDescription)){
 			this.extendedDescription = extendedDescription;
 			this.propertyChanged(ProductFieldNames.EXTENDED_DESCRIPTION);
@@ -186,7 +184,7 @@ public class Product extends BaseModel<Product> {
 		return this.active;
 	}
 	
-	public boolean setActive(){
+	public Product setActive(boolean active){
 		if(this.active != active){
 			this.active = active;
 			this.propertyChanged(ProductFieldNames.ACTIVE);
@@ -199,7 +197,7 @@ public class Product extends BaseModel<Product> {
 		return this.msrp;
 	}
 	
-	public float setMsrp(float msrp){
+	public Product setMsrp(float msrp){
 		if(this.msrp != msrp){
 			this.msrp = msrp;
 			this.propertyChanged(ProductFieldNames.MSRP);
@@ -212,7 +210,7 @@ public class Product extends BaseModel<Product> {
 		return this.createdOn;
 	}
 	
-	public LocalDateTime setCreatedOn(LocalDateTime createdOn){
+	public Product setCreatedOn(LocalDateTime createdOn){
 		if(this.createdOn != createdOn){
 			this.createdOn = createdOn;
 			this.propertyChanged(ProductFieldNames.CREATED_ON);
@@ -231,7 +229,7 @@ public class Product extends BaseModel<Product> {
 		this.quantity = 0;
 		this.reorderPoint = 0;
 		this.restockLevel = 0;
-		this.parentItem = StringUtils.EMPTY;
+		this.parentItem = 0;
 		this.extendedDescription = StringUtils.EMPTY;
 		this.active = false;
 		this.msrp = 0;
