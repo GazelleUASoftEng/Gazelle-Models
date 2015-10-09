@@ -30,6 +30,7 @@ public class Product extends BaseModel<Product> {
 		
 		// extendedDescription can be null, not sure how to handle it
 		this.extendedDescription = rs.getString(ProductFieldNames.EXTENDED_DESCRIPTION);
+		this.active = rs.getBoolean(ProductFieldNames.ACTIVE);
 		this.msrp = rs.getDouble(ProductFieldNames.MSRP);
 		this.createdOn = rs.getTimestamp(ProductFieldNames.CREATED_ON).toLocalDateTime();
 
