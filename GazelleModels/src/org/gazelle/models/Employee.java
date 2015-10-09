@@ -16,19 +16,12 @@ import org.npc.dataaccess.model.BaseModel;
 public class Employee extends BaseModel<Employee> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
-		// unsure of recordID
-		//TODO: Dr. P --> The record ID is taken care of in BaseModel.java. Check out
-		//  BaseModel#load() - line 68.
-
 		this.firstName = rs.getString(EmployeeFieldNames.FIRST_NAME);
 		this.lastName = rs.getString(EmployeeFieldNames.LAST_NAME);
 		this.employeeId = rs.getString(EmployeeFieldNames.EMPLOYEE_ID);  //TODO: Dr. P --> See my comment on the field declaration.
 		this.active = rs.getBoolean(EmployeeFieldNames.ACTIVE);
 		this.classification = EmployeeClassification.map(rs.getInt(EmployeeFieldNames.CLASSIFICATION));
 
-		// unsure of manager
-		//TODO: Dr. P --> Just load it like any other field in the ResultSet object. The
-		//  only difference being that it can be NULL, per your specification.
 		Object managerId = rs.getObject(EmployeeFieldNames.MANAGER);
 		this.managerId = ((managerId != null) ? ((UUID) managerId) : (new UUID(0, 0)));
 
@@ -38,9 +31,6 @@ public class Employee extends BaseModel<Employee> {
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
-		// record.put(EmployeeFieldNames.record_id, this.recordID);
-		//TODO: Dr. P --> The record ID is added to the "record" in BaseModel#insertNewRecord() - line 116.
-
 		record.put(EmployeeFieldNames.FIRST_NAME, this.firstName);
 		record.put(EmployeeFieldNames.LAST_NAME, this.lastName);
 		record.put(EmployeeFieldNames.EMPLOYEE_ID, this.employeeId);  //TODO: Dr. P --> See my comment on the field declaration.
@@ -57,31 +47,24 @@ public class Employee extends BaseModel<Employee> {
 		return record;
 	}
 
-	// Employee column: time_stamp (timestamp)
 	private LocalDateTime timeStamp;
 	public LocalDateTime getTimeStamp() {
-		return this.timeStamp;  //TODO: Dr. P --> You left out the semicolon.
+		return this.timeStamp;  
 	}
 
-	// Employee column: password (varchar(50))
 	private String password;
 	public String getPassword() {
 		return this.password;
 	}
 	public Employee setPassword(String password) {
-		if(!StringUtils.equals(this.password, password)) {  //TODO: Dr. P --> You misspelled the instance variable.
-			this.password = password;  //TODO: Dr. P --> You needed to actually make an assignment to "this.password".
+		if(!StringUtils.equals(this.password, password)) {  
+			this.password = password;  
 			this.propertyChanged(EmployeeFieldNames.PASSWORD);
 		}
 
 		return this;
 	}
 
-	// Not sure how to do Foreign Key
-	// TODO: Dr. P --> For our simple program, it is unnecessary to do anything
-	//  out of the ordinary for foreign keys. The foreign key constraint is just for
-	//  the database. In other words, we will not do anything in our Employee "model
-	//  object" to represent the database constraint. We will just hold the data.
 	private UUID managerId;
 	public UUID getManagerId() {
 		return this.managerId;
@@ -95,24 +78,19 @@ public class Employee extends BaseModel<Employee> {
 		return this;
 	}
 
-	// Employee column: classification (varchar(25))
-	//TODO: Dr. P --> More often than not fields similar to employee classification,
-	//  transaction status, product type, etc... are stored in the database as integers.
-	//  This makes it easier to work with them in code.
 	private EmployeeClassification classification;
 	public EmployeeClassification getClassification() {
 		return this.classification;
 	}
 	public Employee setClassification(EmployeeClassification classification) {
 		if(this.classification != classification) {
-			this.classification = classification;  //TODO: Dr. P --> You needed to actually make an assignment to "this.classification".
+			this.classification = classification;  
 			this.propertyChanged(EmployeeFieldNames.CLASSIFICATION);
 		}
 
 		return this;
 	}
 
-	// Employee column: active (boolean)
 	private boolean active;
 	public boolean getActive() {
 		return this.active;
@@ -126,11 +104,6 @@ public class Employee extends BaseModel<Employee> {
 		return this;
 	}
 
-	//TODO: Dr. P --> I was expecting the teams to get with me about questions for the fields.
-	//  Employee ID should actually be defined as a alphanumeric string of length 15. Think of your
-	//  UA student ID, but alphanumeric. (So string datatype.) You will need to update your
-	//  CREATE TABLE SQL script.
-	// Employee column: employee_id (int)
 	private String employeeId;
 	public String getEmployeeId() {
 		return this.employeeId;
@@ -144,37 +117,31 @@ public class Employee extends BaseModel<Employee> {
 		return this;
 	}
 
-	// Employee column: last_name (varchar(50))
 	private String lastName;
 	public String getLastName() {
 		return this.lastName;
 	}
 	public Employee setLastName(String lastName) {
 		if(!StringUtils.equals(this.lastName, lastName)) {
-			this.lastName = lastName;  //TODO: Dr. P --> You needed to actually make an assignment to "this.lastName".
+			this.lastName = lastName;  
 			this.propertyChanged(EmployeeFieldNames.LAST_NAME);
 		}
 
 		return this;
 	}
 
-	// Employee column: first_name (varchar(50))
 	private String firstName;
 	public String getFirstName() {
 		return this.firstName;
 	}
 	public Employee setFirstName(String firstName) {
 		if(!StringUtils.equals(this.firstName, firstName)) {
-			this.firstName = firstName;  //TODO: Dr. P --> You needed to actually make an assignment to "this.firstName".
+			this.firstName = firstName;  
 			this.propertyChanged(EmployeeFieldNames.FIRST_NAME);
 		}
 
 		return this;
 	}
-	
-	// Not sure how to implement record_id (PK) data type: UUID
-	// Dr. P --> If you look at BaseModel.java, this field is already defined for you.
-	//  By extending BaseModel.java we get it for free. Look at BaseModel.java - line 18. 
 
 	//TODO: Dr. P --> We haven't yet defined "api.Employee", therefore this code should be removed for the time being.
 //	public org.npc.testmodel.api.Employee synchronize(org.npc.testmodel.api.Employee apiEmployee) {
@@ -189,12 +156,6 @@ public class Employee extends BaseModel<Employee> {
 	public Employee() {
 		super(new EmployeeRepository());
 		
-		//TODO: Dr. P --> You need to set default values for your Employee fields.
-		//  These are the Product fields from your copy and paste. These can be removed.
-//		this.count = -1;
-//		this.lookupCode = StringUtils.EMPTY;
-//		this.createdOn = LocalDateTime.now();
-		
 		this.firstName = StringUtils.EMPTY;
 		this.lastName = StringUtils.EMPTY;
 		this.employeeId = StringUtils.EMPTY;
@@ -207,12 +168,6 @@ public class Employee extends BaseModel<Employee> {
 	
 	public Employee(UUID id) {
 		super(id, new EmployeeRepository());
-		
-		//TODO: Dr. P --> You need to set default values for your Employee fields.
-		//  These are the Product fields from your copy and paste. These can be removed.
-//		this.count = -1;
-//		this.lookupCode = StringUtils.EMPTY;
-//		this.createdOn = LocalDateTime.now();
 		
 		this.firstName = StringUtils.EMPTY;
 		this.lastName = StringUtils.EMPTY;
