@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.gazelle.enums.ProductItemType;
@@ -31,7 +32,6 @@ public class Product extends BaseModel<Product> {
 		this.extendedDescription = rs.getString(ProductFieldNames.EXTENDED_DESCRIPTION);
 		this.msrp = rs.getDouble(ProductFieldNames.MSRP);
 		this.createdOn = rs.getTimestamp(ProductFieldNames.CREATED_ON).toLocalDateTime();
-		this.recordId = rs.getRecordId(ProductFieldNames.RECORD_ID);
 
 	}
 
@@ -54,7 +54,6 @@ public class Product extends BaseModel<Product> {
 		}
 		record.put(ProductFieldNames.MSRP, this.msrp);
 		record.put(ProductFieldNames.CREATED_ON, Timestamp.valueOf(this.createdOn));
-		record.put(ProductFieldNames.RECORD_ID, this.recordId);
 				
 		return record;
 	}
@@ -228,8 +227,6 @@ public class Product extends BaseModel<Product> {
 		return this;
 	}
 	
-	private uuid recordId
-	
 	public Product() {
 		super(new ProductRepository());
 		
@@ -248,18 +245,18 @@ public class Product extends BaseModel<Product> {
 		this.createdOn = LocalDateTime.now();
 	}
 	
-	public Product (UUID id) {
+	public Product(UUID id) {
 		super(id, new ProductRepository());
 		
 		this.description = StringUtils.EMPTY;
 		this.lookupCode = StringUtils.EMPTY;
 		this.price = 0;
 		this.itemType = ProductItemType.NORMAL;
-		this.cost = 0;
+		this.cost = 0.00;
 		this.quantity = 0;
 		this.reorderPoint = 0;
 		this.restockLevel = 0;
-		this.parentItem = StringUtils.EMPTY;
+		this.parentItem = 0;
 		this.extendedDescription = StringUtils.EMPTY;
 		this.active = false;
 		this.msrp = 0;
