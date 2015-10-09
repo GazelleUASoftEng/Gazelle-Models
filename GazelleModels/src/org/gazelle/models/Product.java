@@ -16,8 +16,7 @@ import org.npc.dataaccess.model.BaseModel;
 public class Product extends BaseModel<Product> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
-
-		// this.description can be null, not sure how to handle it
+		
 		this.description = rs.getString(ProductFieldNames.DESCRIPTION);
 		this.lookupCode = rs.getString(ProductFieldNames.LOOKUP_CODE);
 		this.price = rs.getDouble(ProductFieldNames.PRICE);
@@ -26,9 +25,7 @@ public class Product extends BaseModel<Product> {
 		this.quantity = rs.getInt(ProductFieldNames.QUANTITY);
 		this.reorderPoint = rs.getInt(ProductFieldNames.REORDER_POINT);
 		this.restockLevel = rs.getInt(ProductFieldNames.RESTOCK_LEVEL);
-		this.parentItem = rs.getInt(ProductFieldNames.PARENT_ITEM);//this is currently an int, but may need to be a foreign key
-		
-		// extendedDescription can be null, not sure how to handle it
+		this.parentItem = rs.getInt(ProductFieldNames.PARENT_ITEM);
 		this.extendedDescription = rs.getString(ProductFieldNames.EXTENDED_DESCRIPTION);
 		this.active = rs.getBoolean(ProductFieldNames.ACTIVE);
 		this.msrp = rs.getDouble(ProductFieldNames.MSRP);
