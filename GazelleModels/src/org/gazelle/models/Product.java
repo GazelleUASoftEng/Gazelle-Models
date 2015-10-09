@@ -31,14 +31,16 @@ public class Product extends BaseModel<Product> {
 		this.extendedDescription = rs.getString(ProductFieldNames.EXTENDED_DESCRIPTION);
 		this.msrp = rs.getDouble(ProductFieldNames.MSRP);
 		this.createdOn = rs.getTimestamp(ProductFieldNames.CREATED_ON).toLocalDateTime();
+		this.recordId = rs.getRecordId(ProductFieldNames.RECORD_ID);
 
 	}
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
 
-		if (this.description != null) 
+		if (this.description != null){ 
 			record.put(ProductFieldNames.DESCRIPTION, this.description);
+		}
 		record.put(ProductFieldNames.LOOKUP_CODE, this.lookupCode);
 		record.put(ProductFieldNames.PRICE, this.price);
 		record.put(ProductFieldNames.ITEM_TYPE, this.itemType.getValue());
@@ -47,10 +49,12 @@ public class Product extends BaseModel<Product> {
 		record.put(ProductFieldNames.REORDER_POINT, this.reorderPoint);
 		record.put(ProductFieldNames.RESTOCK_LEVEL, this.restockLevel);
 		record.put(ProductFieldNames.PARENT_ITEM, this.parentItem);
-		if (this.extendedDescription != null) 
+		if (this.extendedDescription != null){ 
 			record.put(ProductFieldNames.EXTENDED_DESCRIPTION, this.extendedDescription);
+		}
 		record.put(ProductFieldNames.MSRP, this.msrp);
 		record.put(ProductFieldNames.CREATED_ON, Timestamp.valueOf(this.createdOn));
+		record.put(ProductFieldNames.RECORD_ID, this.recordId);
 				
 		return record;
 	}
@@ -224,6 +228,8 @@ public class Product extends BaseModel<Product> {
 		return this;
 	}
 	
+	private uuid recordId
+	
 	public Product() {
 		super(new ProductRepository());
 		
@@ -242,8 +248,6 @@ public class Product extends BaseModel<Product> {
 		this.createdOn = LocalDateTime.now();
 	}
 	
-	//TODO: look into UUIDs for product table
-	/*
 	public Product (UUID id) {
 		super(id, new ProductRepository());
 		
@@ -260,6 +264,6 @@ public class Product extends BaseModel<Product> {
 		this.active = false;
 		this.msrp = 0;
 		this.createdOn = LocalDateTime.now();
-	}*/
+	}
 
 }

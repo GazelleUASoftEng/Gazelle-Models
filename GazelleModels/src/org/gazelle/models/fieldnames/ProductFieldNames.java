@@ -16,4 +16,5 @@ public class ProductFieldNames extends BaseFieldNames {
 	public static final String ACTIVE = "active";
 	public static final String MSRP = "msrp";
 	public static final String CREATED_ON = "createdon";
+	public static final String RECORD_ID = "record_id"
 }
