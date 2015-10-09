@@ -52,6 +52,7 @@ public class Product extends BaseModel<Product> {
 		if (this.extendedDescription != null){ 
 			record.put(ProductFieldNames.EXTENDED_DESCRIPTION, this.extendedDescription);
 		}
+		record.put(ProductFieldNames.ACTIVE, this.active);
 		record.put(ProductFieldNames.MSRP, this.msrp);
 		record.put(ProductFieldNames.CREATED_ON, Timestamp.valueOf(this.createdOn));
 				
