@@ -1,3 +1,5 @@
+package org.gazelle.models.fieldnames;
+
 import org.npc.dataaccess.model.BaseFieldNames;
 
 public class TransactionEntryFieldNames extends BaseFieldNames {
