@@ -1,9 +1,16 @@
 package org.gazelle.repositories;
 
+import java.sql.SQLException;
+
 import org.gazelle.models.Product;
+import org.gazelle.models.fieldnames.ProductFieldNames;
 import org.gazelle.repositories.interfaces.ProductRepositoryInterface;
 import org.npc.dataaccess.repository.BaseRepository;
 import org.npc.dataaccess.repository.DatabaseTable;
+import org.npc.dataaccess.repository.helpers.PostgreFunctionType;
+import org.npc.dataaccess.repository.helpers.SQLComparisonType;
+import org.npc.dataaccess.repository.helpers.where.WhereClause;
+import org.npc.dataaccess.repository.helpers.where.WhereContainer;
 
 public class ProductRepository extends BaseRepository<Product> implements ProductRepositoryInterface {
 	@Override
