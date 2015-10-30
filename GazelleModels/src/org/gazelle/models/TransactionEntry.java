@@ -64,6 +64,8 @@ public class TransactionEntry extends BaseModel<TransactionEntry> {
 		return this;
 	}
 	
+	private UUID record_id;
+	
 	private UUID product_id;
 	public UUID getProductID() {
 		return this.product_id;
