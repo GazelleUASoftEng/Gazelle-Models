@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.gazelle.models.fieldnames.TransactionEntryFieldNames;
+import org.gazelle.models.fieldnames.TransactionFieldNames;
 import org.gazelle.repositories.TransactionEntryRepository;
 import org.npc.dataaccess.model.BaseModel;
 
@@ -17,6 +18,10 @@ public class TransactionEntry extends BaseModel<TransactionEntry> {
 		this.price = rs.getFloat(TransactionEntryFieldNames.PRICE);
 		this.quantity = rs.getInt(TransactionEntryFieldNames.QUANTITY);
 		this.createdon = rs.getTimestamp(TransactionEntryFieldNames.CREATED_ON).toLocalDateTime();
+		Object transaction_id = rs.getObject(TransactionEntryFieldNames.TRANSACTION_ID);
+		this.transaction_id = ((transaction_id != null) ? ((UUID) transaction_id) : (new UUID(0, 0)));
+		Object product_id = rs.getObject(TransactionEntryFieldNames.PRODUCT_ID);
+		this.product_id = ((product_id != null) ? ((UUID) product_id) : (new UUID(0, 0)));
 	}
 	
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
@@ -24,6 +29,13 @@ public class TransactionEntry extends BaseModel<TransactionEntry> {
 		record.put(TransactionEntryFieldNames.QUANTITY, this.quantity);
 		
 		record.put(TransactionEntryFieldNames.CREATED_ON, Timestamp.valueOf(this.createdon));
+		
+		if (!this.transaction_id.equals(null)) {
+			record.put(TransactionEntryFieldNames.PRODUCT_ID, this.product_id);
+		}
+		if (!this.product_id.equals(null)) {
+			record.put(TransactionEntryFieldNames.TRANSACTION_ID, this.transaction_id);
+		}
 	
 		return record;
 	}

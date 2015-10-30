@@ -35,7 +35,6 @@ public class Product extends BaseModel<Product> {
 
 	@Override
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
-
 		if (this.description != null){ 
 			record.put(ProductFieldNames.DESCRIPTION, this.description);
 		}
