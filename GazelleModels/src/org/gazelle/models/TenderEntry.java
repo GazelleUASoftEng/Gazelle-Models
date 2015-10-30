@@ -2,16 +2,11 @@ package org.gazelle.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-import org.gazelle.enums.EmployeeClassification;
 import org.gazelle.enums.Paytype;
-import org.gazelle.models.fieldnames.EmployeeFieldNames;
-import org.gazelle.models.fieldnames.ProductFieldNames;
 import org.gazelle.models.fieldnames.TenderEntryFieldNames;
-import org.gazelle.models.fieldnames.TransactionFieldNames;
 import org.gazelle.repositories.TenderEntryRepository;
 import org.npc.dataaccess.model.BaseModel;
 import java.util.UUID;
@@ -19,7 +14,7 @@ import java.util.UUID;
 
 public class TenderEntry extends BaseModel<TenderEntry> {
 
-	private UUID record_id;
+	private UUID recordid;
 	private double amount;
 	private Paytype paytype;
 	private LocalDateTime time;
@@ -28,7 +23,7 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
 
-		this.record_id = (UUID)rs.getObject(TenderEntryFieldNames.record_id); // make
+		this.recordid = (UUID)rs.getObject(TenderEntryFieldNames.recordid); // make
 		this.amount = rs.getDouble(TenderEntryFieldNames.amount);		// make
 //		this.paytype = rs.getFloat(TenderEntryFieldNames.paytype);		// make
 		this.paytype = Paytype.map(rs.getInt(TenderEntryFieldNames.paytype));
@@ -42,7 +37,7 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
 		record.put(TenderEntryFieldNames.paytype, this.paytype);
 		record.put(TenderEntryFieldNames.amount, this.amount);
-		record.put(TenderEntryFieldNames.record_id, this.record_id);
+		record.put(TenderEntryFieldNames.recordid, this.recordid);
 		record.put(TenderEntryFieldNames.time, this.time);
 		record.put(TenderEntryFieldNames.transactionid, this.transactionid);
 	
@@ -50,7 +45,7 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 	}
 	
 	public UUID getRecID(){
-		return this.record_id;
+		return this.recordid;
 	}
 
 	public double getAmount(){
@@ -70,10 +65,10 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 	}
 
 	public TenderEntry setRecID(UUID input){
-		if(this.record_id != input)
+		if(this.recordid != input)
 		{
-			this.record_id = input;
-			this.propertyChanged(TenderEntryFieldNames.record_id);
+			this.recordid = input;
+			this.propertyChanged(TenderEntryFieldNames.recordid);
 		}
 		return this;
 	}
@@ -113,7 +108,7 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 
 	public TenderEntry() {
 		super(new TenderEntryRepository());
-		this.record_id = new UUID (0, 0);
+		this.recordid = new UUID (0, 0);
 		this.amount = 0.0;
 		this.time = LocalDateTime.now();
 		this.paytype = null;
