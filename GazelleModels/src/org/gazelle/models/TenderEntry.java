@@ -14,7 +14,6 @@ import java.util.UUID;
 
 public class TenderEntry extends BaseModel<TenderEntry> {
 
-	private UUID recordid;
 	private double amount;
 	private Paytype paytype;
 	private LocalDateTime time;
@@ -23,7 +22,6 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
 
-		this.recordid = (UUID)rs.getObject(TenderEntryFieldNames.recordid); // make
 		this.amount = rs.getDouble(TenderEntryFieldNames.amount);		// make
 //		this.paytype = rs.getFloat(TenderEntryFieldNames.paytype);		// make
 		this.paytype = Paytype.map(rs.getInt(TenderEntryFieldNames.paytype));
@@ -37,17 +35,12 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
 		record.put(TenderEntryFieldNames.paytype, this.paytype);
 		record.put(TenderEntryFieldNames.amount, this.amount);
-		record.put(TenderEntryFieldNames.recordid, this.recordid);
 		record.put(TenderEntryFieldNames.time, this.time);
 		record.put(TenderEntryFieldNames.transactionid, this.transactionid);
 	
 		return record;
 	}
 	
-	public UUID getRecID(){
-		return this.recordid;
-	}
-
 	public double getAmount(){
 		return this.amount;
 	}
@@ -62,15 +55,6 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 
 	public UUID getTransID(){
 		return this.transactionid;
-	}
-
-	public TenderEntry setRecID(UUID input){
-		if(this.recordid != input)
-		{
-			this.recordid = input;
-			this.propertyChanged(TenderEntryFieldNames.recordid);
-		}
-		return this;
 	}
 
 	public TenderEntry setAmount(double input){
@@ -108,7 +92,6 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 
 	public TenderEntry() {
 		super(new TenderEntryRepository());
-		this.recordid = new UUID (0, 0);
 		this.amount = 0.0;
 		this.time = LocalDateTime.now();
 		this.paytype = null;
