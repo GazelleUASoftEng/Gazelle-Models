@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang3.StringUtils;
 import org.gazelle.enums.ProductApiRequestStatus;
 import org.gazelle.enums.ProductItemType;
-import org.gazelle.models.fieldnames.ProductFieldNames;
 
 @XmlRootElement
 public class Product {
