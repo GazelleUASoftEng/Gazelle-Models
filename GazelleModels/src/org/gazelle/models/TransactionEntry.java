@@ -64,19 +64,6 @@ public class TransactionEntry extends BaseModel<TransactionEntry> {
 		return this;
 	}
 	
-	private UUID record_id;
-	public UUID getRecordID() {
-		return this.record_id;
-	}
-	
-	public TransactionEntry setRecordID(UUID record_id) {
-		if (this.record_id != record_id) {
-			this.record_id = record_id;
-			this.propertyChanged(TransactionEntryFieldNames.RECORD_ID);
-		}
-		return this;
-	}
-	
 	private UUID product_id;
 	public UUID getProductID() {
 		return this.product_id;
