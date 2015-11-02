@@ -2,6 +2,7 @@ package org.gazelle.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -22,20 +23,16 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 	@Override
 	protected void fillFromRecord(ResultSet rs) throws SQLException {
 
-		this.amount = rs.getDouble(TenderEntryFieldNames.amount);		// make
-//		this.paytype = rs.getFloat(TenderEntryFieldNames.paytype);		// make
+		this.amount = rs.getDouble(TenderEntryFieldNames.amount);
 		this.paytype = Paytype.map(rs.getInt(TenderEntryFieldNames.paytype));
 		this.time = rs.getTimestamp(TenderEntryFieldNames.time).toLocalDateTime();
-//		this.time = rs.getFloat(TenderEntryFieldNames.time);			// make
 		this.transactionid = (UUID)rs.getObject(TenderEntryFieldNames.transactionid);
-//		this.transactionid = rs.getFloat(TenderEntryFieldNames.transactionid);	// make
-
 	}
 	
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
-		record.put(TenderEntryFieldNames.paytype, this.paytype);
+		record.put(TenderEntryFieldNames.paytype, this.paytype.getValue());
 		record.put(TenderEntryFieldNames.amount, this.amount);
-		record.put(TenderEntryFieldNames.time, this.time);
+		record.put(TenderEntryFieldNames.time, Timestamp.valueOf(this.time));
 		record.put(TenderEntryFieldNames.transactionid, this.transactionid);
 	
 		return record;
@@ -62,14 +59,6 @@ public class TenderEntry extends BaseModel<TenderEntry> {
 		{
 			this.amount = input;
 			this.propertyChanged(TenderEntryFieldNames.amount);
-		}
-		return this;
-	}
-	public TenderEntry setTime(LocalDateTime input){
-		if(this.time != input)
-		{
-			this.time = input;
-			this.propertyChanged(TenderEntryFieldNames.time);
 		}
 		return this;
 	}
