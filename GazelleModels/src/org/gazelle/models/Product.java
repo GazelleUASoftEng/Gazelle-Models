@@ -261,4 +261,22 @@ public class Product extends BaseModel<Product> {
 		this.createdOn = LocalDateTime.now();
 	}
 
+	public Product(org.gazelle.api.Product apiProduct) {
+		super(apiProduct.getId(), new ProductRepository());
+
+		this.description = apiProduct.getDescription();
+		this.lookupCode = apiProduct.getLookupCode();
+		this.price = apiProduct.getPrice();
+		this.itemType =apiProduct.getItemType();
+		this.cost = apiProduct.getCost();
+		this.quantity = apiProduct.getQuantity();
+		this.reorderPoint = apiProduct.getReorderPoint();
+		this.restockLevel = apiProduct.getRestockLevel();
+		this.parentItem = apiProduct.getParentItem();
+		this.extendedDescription = apiProduct.getExtendedDescription();
+		this.active = apiProduct.getActive();
+		this.msrp = apiProduct.getMsrp();
+		this.createdOn = apiProduct.getCreatedOn();
+	}
+
 }

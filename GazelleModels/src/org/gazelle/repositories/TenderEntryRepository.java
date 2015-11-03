@@ -12,6 +12,6 @@ public class TenderEntryRepository extends BaseRepository<TenderEntry> implement
 	}
 	
 	public TenderEntryRepository() {
-		super(DatabaseTable.TENDERENTRY);
+		super(DatabaseTable.TENDER_ENTRY);
 	}
 }
