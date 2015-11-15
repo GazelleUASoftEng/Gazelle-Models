@@ -117,4 +117,12 @@ public class Transaction extends BaseModel<Transaction>{
 		this.parentId = new UUID (0, 0);
 		this.timeStamp = LocalDateTime.now();
 	}
+	public Transaction(org.gazelle.api.Transaction apiTransaction){
+		this.recordId = apiTransaction.getId();
+		this.cashierId = apiTransaction.getCashierId();
+		this.amount = apiTransaction.getAmount();
+		this.transactionType = apiTransaction.getTransactionType();
+		this.parentId = apiTransaction.getParentId();
+		this.timeStamp = apiTransaction.getTimeStamp();
+	}
 }
