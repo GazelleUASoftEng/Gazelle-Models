@@ -23,6 +23,10 @@ public class Product {
 	public String getDescription(){
 		return this.description;
 	}
+	public Product setDescription(String d){
+		this.description=d;
+		return this;
+	}
 	
 	
 	
@@ -30,18 +34,27 @@ public class Product {
 	public String getLookupCode(){
 		return this.lookupCode;
 	}
-	
+	public Product setLookupCode(String lc){
+		return this;//not sure if this is safe to change
+	}
 	
 	private double price;
 	public double getPrice(){
 		return this.price;
 	}
-	
+	public Product setPrice(double p){
+		this.price = p;
+		return this;
+	}
 	
 	
 	private ProductItemType itemType;
 	public ProductItemType getItemType(){
 		return this.itemType;
+	}
+	public Product setItemType(ProductItemType t){
+		this.itemType = t;
+		return this;
 	}
 	
 	
@@ -50,57 +63,78 @@ public class Product {
 	public double getCost(){
 		return this.cost;
 	}
-	
+	public Product setCost(double c){
+		this.cost=c;
+		return this;
+	}
 	
 	
 	private int quantity;
 	public int getQuantity(){
 		return this.quantity;
 	}
-	
+	public Product setQuantity(int q){
+		this.quantity = q;
+		return this;
+	}
 	
 	
 	private int reorderPoint;
 	public int getReorderPoint(){
 		return this.reorderPoint;
 	}
-	
+	public Product setReorderPoint(int r){
+		this.reorderPoint = r;
+		return this;
+	}
 	
 	
 	private int restockLevel;
 	public int getRestockLevel(){
 		return this.restockLevel;
 	}
-	
+    public Product setRestockLevel(int r){
+    	this.restockLevel=r;
+    	return this;
+    }
 	
 	private int parentItem;
 	public int getParentItem(){
 		return this.parentItem;
 	}
-	
+	public Product setParentItem(int p){
+		this.parentItem=p;
+		return this;
+	}
 	
 	private String extendedDescription;
 	public String getExtendedDescription(){
 		return this.extendedDescription;
 	}
-	
+	public Product setExtendedDescription(String e){
+		this.extendedDescription=e;
+		return this;
+	}
 	
 	
 	private boolean active;
 	public boolean getActive(){
 		return this.active;
 	}
-	
+	public Product setActive(boolean a){
+		this.active=a;
+		return this;
+	}
 	
 	
 	private double msrp;
 	public double getMsrp(){
 		return this.msrp;
 	}
-	
-	
-	
-	
+	public Product setMsrp(double m){
+		this.msrp=m;
+		return this;
+	}
 	
 	private int count;
 	public int getCount() {
@@ -119,6 +153,7 @@ public class Product {
 		this.createdOn = createdOn;
 		return this;
 	}
+	
 	
 	private ProductApiRequestStatus apiRequestStatus;
 	public ProductApiRequestStatus getApiRequestStatus() {
