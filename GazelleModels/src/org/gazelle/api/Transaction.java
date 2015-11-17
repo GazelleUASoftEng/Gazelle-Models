@@ -21,16 +21,16 @@ public class Transaction{
 	}
 	
 	private UUID cashierId;
-	public float getCashierId(){
+	public UUID getCashierId(){
 		return this.cashierId;
 	}
-	public Transaction setCashierId(float cashierId){
+	public Transaction setCashierId(UUID cashierId){
 		this.cashierId = cashierId;
 		return this;
 	}
 	
-	private float amount;
-	public float getAmount(){
+	private double amount;
+	public double getAmount(){
 		return this.amount;
 	}
 	public Transaction setAmount(float amount){
@@ -60,10 +60,6 @@ public class Transaction{
 	public LocalDateTime getTimeStamp(){
 		return this.timeStamp;
 	}
-	public Transaction setTimeStamp(LocalDateTime timeStamp){
-		this.timeStamp = timeStamp;
-		return this;
-	}
 
 	private TransactionApiRequestStatus apiRequestStatus;
 	public TransactionApiRequestStatus getApiRequestStatus(){
@@ -89,16 +85,14 @@ public class Transaction{
 	}
 	
 	public Transaction(){
-		this.recordId = new UUID(0,0);
 		this.cashierId = new UUID(0,0);
 		this.amount = 0;
-		this.transactionType = 0;
+		this.transactionType = TransactionType.UNKNOWN;
 		this.parentId = new UUID(0,0);
-		this.timeStamp = LocalDatetime.now();
+		this.timeStamp = LocalDateTime.now();
 	}
 	
 	public Transaction(org.gazelle.models.Transaction modelTransaction) {
-		this.recordId = modelTransaction.getId();
 		this.cashierId = modelTransaction.getCashierId();
 		this.amount = modelTransaction.getAmount();
 		this.transactionType = modelTransaction.getTransactionType();

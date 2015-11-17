@@ -19,8 +19,8 @@ public class TransactionEntry{
 		return this;
 	}
 	
-	private float price;
-	public float getPrice(){
+	private double price;
+	public double getPrice(){
 		return this.price;
 	}
 	public TransactionEntry setPrice(float price){
@@ -88,7 +88,6 @@ public class TransactionEntry{
 	}
 	
 	public TransactionEntry(){
-		this.recordId = new UUID(0,0);
 		this.price = 0.00;
 		this.quantity = 0;
 		this.transactionId = new UUID(0,0);
@@ -97,7 +96,6 @@ public class TransactionEntry{
 	}
 	
 	public TransactionEntry(org.gazelle.models.TransactionEntry modelTransactionEntry) {
-		this.recordId = modelTransactionEntry.getId();
 		this.price = modelTransactionEntry.getPrice();
 		this.quantity = modelTransactionEntry.getQuantity();
 		this.transactionId = modelTransactionEntry.getTransactionID();
