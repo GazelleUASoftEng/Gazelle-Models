@@ -16,7 +16,7 @@ public enum TransactionEntryApiRequestStatus{
 
 	public static TransactionEntryApiRequestStatus map(int key){
 		if (valueMap == null) {
-			valueMap = new HashMap<Integer, ProductApiRequestStatus>();
+			valueMap = new HashMap<Integer, TransactionEntryApiRequestStatus>();
 
 			for (TransactionEntryApiRequestStatus status : TransactionEntryApiRequestStatus.values()){
 				valueMap.put(status.getValue(), status);

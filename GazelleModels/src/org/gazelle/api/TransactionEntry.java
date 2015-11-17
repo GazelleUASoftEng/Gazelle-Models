@@ -23,7 +23,7 @@ public class TransactionEntry{
 	public double getPrice(){
 		return this.price;
 	}
-	public TransactionEntry setPrice(float price){
+	public TransactionEntry setPrice(double price){
 		this.price = price;
 		return this;
 	}
@@ -88,6 +88,10 @@ public class TransactionEntry{
 	}
 	
 	public TransactionEntry(){
+<<<<<<< Updated upstream
+=======
+		this.id = new UUID(0,0);
+>>>>>>> Stashed changes
 		this.price = 0.00;
 		this.quantity = 0;
 		this.transactionId = new UUID(0,0);
@@ -96,6 +100,10 @@ public class TransactionEntry{
 	}
 	
 	public TransactionEntry(org.gazelle.models.TransactionEntry modelTransactionEntry) {
+<<<<<<< Updated upstream
+=======
+		this.id = modelTransactionEntry.getId();
+>>>>>>> Stashed changes
 		this.price = modelTransactionEntry.getPrice();
 		this.quantity = modelTransactionEntry.getQuantity();
 		this.transactionId = modelTransactionEntry.getTransactionID();
@@ -103,6 +111,6 @@ public class TransactionEntry{
 		this.productId = modelTransactionEntry.getProductID();
 	
 		this.apiRequestMessage = StringUtils.EMPTY;
-		this.apiRequestStatus = ProductApiRequestStatus.OK;
+		this.apiRequestStatus = TransactionEntryApiRequestStatus.OK;
 	}
 }

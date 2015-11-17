@@ -17,7 +17,7 @@ public class Transaction extends BaseModel<Transaction>{
 		this.cashierId = (UUID)rs.getObject(TransactionFieldNames.CASHIER_ID);
 		
 		this.amount = rs.getDouble(TransactionFieldNames.AMOUNT);
-		this.type = TransactionType.map(rs.getInt(TransactionFieldNames.TYPE));
+		this.transactionType = TransactionType.map(rs.getInt(TransactionFieldNames.TYPE));
 		
 		Object parentId = rs.getObject(TransactionFieldNames.PARENT_ID);
 		this.parentId = ((parentId != null) ? ((UUID) parentId) : (new UUID(0, 0)));
@@ -28,7 +28,7 @@ public class Transaction extends BaseModel<Transaction>{
 	protected Map<String, Object> fillRecord(Map<String, Object> record) {
 		record.put(TransactionFieldNames.CASHIER_ID, this.cashierId);
 		record.put(TransactionFieldNames.AMOUNT, this.amount);
-		record.put(TransactionFieldNames.TYPE, this.type.getValue());
+		record.put(TransactionFieldNames.TYPE, this.transactionType.getValue());
 		
 		if (this.parentId != null) {
 			record.put(TransactionFieldNames.PARENT_ID, this.parentId);
@@ -37,6 +37,15 @@ public class Transaction extends BaseModel<Transaction>{
 		record.put(TransactionFieldNames.TIME_STAMP, Timestamp.valueOf(this.timeStamp));
 	
 		return record;
+	}
+	
+	private UUID recordId;
+	public UUID getRecordId(){
+		return this.recordId;
+	}
+	public Transaction setRecordId(UUID recordId){
+		this.recordId = recordId;
+		return this;
 	}
 	
 	private LocalDateTime timeStamp;
@@ -58,13 +67,13 @@ public class Transaction extends BaseModel<Transaction>{
 		return this;
 	}
 	
-	private TransactionType type;
-	public TransactionType getType() {
-		return this.type;
+	private TransactionType transactionType;
+	public TransactionType getTransactionType() {
+		return this.transactionType;
 	}
-	public Transaction setType(TransactionType type) {
-		if(this.type != type){
-			this.type = type;
+	public Transaction setTransactionType(TransactionType type) {
+		if(this.transactionType != type){
+			this.transactionType = type;
 			this.propertyChanged(TransactionFieldNames.TYPE);
 		}
 		
@@ -102,7 +111,7 @@ public class Transaction extends BaseModel<Transaction>{
 		
 		this.cashierId = new UUID (0, 0);
 		this.amount = 0.00;
-		this.type = TransactionType.UNKNOWN;
+		this.transactionType = TransactionType.UNKNOWN;
 		this.parentId = new UUID (0, 0);
 		this.timeStamp = LocalDateTime.now();
 		
@@ -113,15 +122,30 @@ public class Transaction extends BaseModel<Transaction>{
 		
 		this.cashierId = new UUID (0, 0);
 		this.amount = 0.00;
-		this.type = TransactionType.UNKNOWN;
+		this.transactionType = TransactionType.UNKNOWN;
 		this.parentId = new UUID (0, 0);
 		this.timeStamp = LocalDateTime.now();
 	}
 	public Transaction(org.gazelle.api.Transaction apiTransaction){
+<<<<<<< Updated upstream
 		this.cashierId = apiTransaction.getCashierId();
 		this.amount = apiTransaction.getAmount();
 		this.type = apiTransaction.getTransactionType();
 		this.parentId = apiTransaction.getParentId();
+=======
+		super (new TransactionRepository());
+		this.recordId = UUID.randomUUID();
+		this.cashierId = UUID.fromString(apiTransaction.getCashierId());
+		this.amount = apiTransaction.getAmount();
+		this.transactionType = apiTransaction.getTransactionType();
+		if(apiTransaction.getParentId() == null){
+			this.parentId = null;
+		}
+		else {
+			this.parentId = UUID.fromString(apiTransaction.getParentId());		
+		}
+
+>>>>>>> Stashed changes
 		this.timeStamp = apiTransaction.getTimeStamp();
 	}
 }

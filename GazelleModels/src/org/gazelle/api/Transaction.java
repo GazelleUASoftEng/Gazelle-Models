@@ -11,15 +11,16 @@ import org.gazelle.enums.TransactionApiRequestStatus;
 
 @XmlRootElement
 public class Transaction{
-	private UUID id;
-	public UUID getId(){
+	private String id;
+	public String getId(){
 		return this.id;
 	}
 	public Transaction setId(UUID id){
-		this.id = id;
+		this.id = id.toString();
 		return this;
 	}
 	
+<<<<<<< Updated upstream
 	private UUID cashierId;
 	public UUID getCashierId(){
 		return this.cashierId;
@@ -29,11 +30,22 @@ public class Transaction{
 		return this;
 	}
 	
+=======
+	private String cashierId;
+	public String getCashierId(){
+		return this.cashierId;
+	}
+	public Transaction setCashierId(String cashierId){
+		this.cashierId = cashierId;
+		return this;
+	}
+
+>>>>>>> Stashed changes
 	private double amount;
 	public double getAmount(){
 		return this.amount;
 	}
-	public Transaction setAmount(float amount){
+	public Transaction setAmount(double amount){
 		this.amount = amount;
 		return this;
 	}
@@ -47,11 +59,11 @@ public class Transaction{
 		return this;
 	}
 	
-	private UUID parentId;
-	public UUID getParentId(){
+	private String parentId;
+	public String getParentId(){
 		return this.parentId;
 	}
-	public Transaction setParentId(UUID parentId){
+	public Transaction setParentId(String parentId){
 		this.parentId = parentId;
 		return this;
 	}
@@ -83,23 +95,35 @@ public class Transaction{
 		
 		return this;
 	}
-	
+
 	public Transaction(){
+<<<<<<< Updated upstream
 		this.cashierId = new UUID(0,0);
 		this.amount = 0;
 		this.transactionType = TransactionType.UNKNOWN;
 		this.parentId = new UUID(0,0);
+=======
+		this.cashierId = StringUtils.EMPTY;
+		this.amount = 0;
+		this.transactionType = TransactionType.UNKNOWN;
+		this.parentId = StringUtils.EMPTY;
+>>>>>>> Stashed changes
 		this.timeStamp = LocalDateTime.now();
 	}
 	
 	public Transaction(org.gazelle.models.Transaction modelTransaction) {
+<<<<<<< Updated upstream
 		this.cashierId = modelTransaction.getCashierId();
+=======
+		this.id = modelTransaction.getId().toString();
+		this.cashierId = modelTransaction.getCashierId().toString();
+>>>>>>> Stashed changes
 		this.amount = modelTransaction.getAmount();
 		this.transactionType = modelTransaction.getTransactionType();
-		this.parentId = modelTransaction.getParentId();
+		this.parentId = modelTransaction.getParentId().toString();
 		this.timeStamp = modelTransaction.getTimeStamp();
 	
 		this.apiRequestMessage = StringUtils.EMPTY;
-		this.apiRequestStatus = ProductApiRequestStatus.OK;
+		this.apiRequestStatus = TransactionApiRequestStatus.OK;
 	}
 }

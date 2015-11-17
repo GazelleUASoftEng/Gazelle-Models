@@ -4,6 +4,7 @@ import org.gazelle.models.Transaction;
 import org.gazelle.repositories.interfaces.TransactionRepositoryInterface;
 import org.npc.dataaccess.repository.BaseRepository;
 import org.npc.dataaccess.repository.DatabaseTable;
+import org.gazelle.models.fieldnames.TransactionFieldNames;
 
 public class TransactionRepository extends BaseRepository<Transaction> implements TransactionRepositoryInterface{
 	public Transaction createOne() {
