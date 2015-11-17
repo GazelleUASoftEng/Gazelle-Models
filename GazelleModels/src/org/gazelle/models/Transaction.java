@@ -127,12 +127,6 @@ public class Transaction extends BaseModel<Transaction>{
 		this.timeStamp = LocalDateTime.now();
 	}
 	public Transaction(org.gazelle.api.Transaction apiTransaction){
-<<<<<<< Updated upstream
-		this.cashierId = apiTransaction.getCashierId();
-		this.amount = apiTransaction.getAmount();
-		this.type = apiTransaction.getTransactionType();
-		this.parentId = apiTransaction.getParentId();
-=======
 		super (new TransactionRepository());
 		this.recordId = UUID.randomUUID();
 		this.cashierId = UUID.fromString(apiTransaction.getCashierId());
@@ -145,7 +139,6 @@ public class Transaction extends BaseModel<Transaction>{
 			this.parentId = UUID.fromString(apiTransaction.getParentId());		
 		}
 
->>>>>>> Stashed changes
 		this.timeStamp = apiTransaction.getTimeStamp();
 	}
 }
